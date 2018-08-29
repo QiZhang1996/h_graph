@@ -85,18 +85,16 @@ void List::deleteList(int position)//删除指定位置的节点
     {
         p=p->pNext;
     }
-    if(p->pNext != NULL){
-        p->pLast->pNext=p->pNext;
-        p->pNext->pLast=p->pLast;
+    if(p == pTail){
+
+        p->pLast->pNext=NULL;
+        pTail = p->pLast;
         delete p;
         length--;
-
     }
     else{
-
         p->pLast->pNext=p->pNext;
-        //p->pNext->pLast=p->pLast;
-        p->pLast = pTail;
+        p->pNext->pLast=p->pLast;
         delete p;
         length--;
 

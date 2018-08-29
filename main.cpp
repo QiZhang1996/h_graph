@@ -5,79 +5,64 @@ using namespace std;
 
 int main() {
 
+    HGraph hGraph(12,18);
 
-//    List l;
-//    SubList *sl = new SubList();
-//    HNode node;
-//    node.ppoint = 1;
-//    node.lpoint = 2;
-//    node.npoint = 3;
-//    sl->insertNode(node);
-//
-//    HNode node2;
-//    node2.ppoint = 4;
-//    node2.lpoint = 5;
-//    node2.npoint = 6;
-//    sl->insertNode(node2);
-//
-//    HNode node3;
-//    node3.ppoint = 7;
-//    node3.lpoint = 8;
-//    node3.npoint = 9;
-//    sl->insertNode(node3);
-//
-//    HNode node4;
-//    node4.ppoint = 10;
-//    node4.lpoint = 12;
-//    node4.npoint = 13;
-//    sl->insertNode(node4);
-//
-//    sl->traverseList();
-//
-//    ListNode * p = new ListNode();
-//    p->subList = sl;
-//    p->NDeg = 666;
-//
-//    ListNode * p2 = new ListNode();
-//    p2->subList = sl;
-//    p2->NDeg = 888;
-//
-//    ListNode * p3 = new ListNode();
-//    p3->subList = sl;
-//    p3->NDeg = 777;
-//
-//    l.insert(p);
-//    l.insert(p2);
-//    l.insert(p3);
-//    l.traverseList();
-//
-//    HNode hh = l.getHNode(1,3);
-//    cout << hh.ppoint << endl;
-//    cout << hh.lpoint << endl;
-//    cout << hh.npoint << endl;
-//
-//    cout <<  l.findNsub(888) << endl;
-//    cout << l.length << endl;
+    hGraph.addEdge(1,2);
+    //hGraph.printGraph();
+    hGraph.addEdge(2,3);
+    //hGraph.printGraph();
+    hGraph.addEdge(2,4);
+    //hGraph.printGraph();
+    hGraph.addEdge(2,7);
+    //hGraph.printGraph();
+    hGraph.addEdge(2,12);
+    //hGraph.printGraph();
 
+    hGraph.addEdge(3,4);
+    //hGraph.printGraph();
+    hGraph.addEdge(3,5);
+    //hGraph.printGraph();
 
+    hGraph.addEdge(3,6);
+    //hGraph.printGraph();
+    hGraph.addEdge(3,7);
+    //hGraph.printGraph();
+    hGraph.addEdge(6,7);
+    //hGraph.printGraph();
 
-    HGraph hGraph(6,7);
-    hGraph.addEdage(1,2);
+    hGraph.addEdge(6,8);
     //hGraph.printGraph();
-    hGraph.addEdage(2,3);
+    hGraph.addEdge(6,11);
     //hGraph.printGraph();
-    hGraph.addEdage(2,4);
+    hGraph.addEdge(8,9);
     //hGraph.printGraph();
-    hGraph.addEdage(2,5);
+    hGraph.addEdge(8,10);
     //hGraph.printGraph();
-    hGraph.addEdage(3,5);
-    hGraph.printGraph();
-    hGraph.addEdage(4,5);
-    hGraph.printGraph();
-    hGraph.addEdage(5,6);
+    hGraph.addEdge(8,12);
+    //hGraph.printGraph();
+
+    hGraph.addEdge(9,10);
+    //hGraph.printGraph();
+    hGraph.addEdge(9,11);
+    //hGraph.printGraph();
+    hGraph.addEdge(10,12);
     hGraph.printGraph();
 
+    hGraph.addEdge(9, 12);
+    hGraph.printGraph();
 
+    //hGraph.removeEdge(9,10);
+    //hGraph.printGraph();
+
+    int total = 0;
+    for(int i = 1; i<=12; i++){
+
+        cout << "i = " << i << ": ";
+
+        total = total + hGraph.findEdgeNeigh(i);
+    }
+
+    cout << "triangle number: " << total/3 << endl;
 
     return 0;
 }

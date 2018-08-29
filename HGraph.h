@@ -35,16 +35,25 @@ public:
         E = e;
         graph.resize(V+1);
 
-
-
     }
 
 public:
-    int addEdgeSub(int x, int y);
-    int addEdage(int x, int y);
-    void moveNeighbor(int v);
-
     void printGraph();
+
+    int addEdgeSub(int x, int y);
+    int addEdge(int x, int y);
+    void moveNeighbor(int x);
+
+
+    int removeEdge(int x, int y);
+    int removeEdgeSub(int x, int y);
+    void moveNeighborRe(int x);
+
+    bool queryAdj(int x, int y);
+
+    int findEdgeNeigh(int x);
+
+
 
 
 };

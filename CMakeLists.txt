@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(hgraph2_v2)
+project(h_graph)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -12,4 +12,4 @@ set(SOURCE_FILES
         SubList.cpp
         SubList.h)
 
-add_executable(hgraph2_v2 ${SOURCE_FILES})
+add_executable(h_graph ${SOURCE_FILES})

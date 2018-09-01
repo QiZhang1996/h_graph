@@ -10,6 +10,6 @@ set(SOURCE_FILES
         List.h
         main.cpp
         SubList.cpp
-        SubList.h)
+        SubList.h tool.h)
 
 add_executable(h_graph ${SOURCE_FILES})

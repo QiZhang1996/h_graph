@@ -4,6 +4,39 @@
 
 #include "HGraph.h"
 
+
+void HGraph::printVertex(int i){
+
+    cout << "##############################" << endl;
+    cout << "V" << i <<  ": d = " << graph[i].deg << endl;
+    if(graph[i].NSet.traverseList()==0){
+
+        cout << "N: NULL" << endl;
+
+    }
+
+    cout << "H: ";
+    vector<HNode>::iterator it;
+    if(graph[i].HSet.empty()){
+
+        cout << "NULL" << endl;
+    } else{
+
+        for(it = graph[i].HSet.begin(); it != graph[i].HSet.end(); it++){
+
+
+
+            cout << "V" << it->npoint << "[p = " << it->ppoint << ", l = " << it->lpoint << ", n = " << it->npoint <<"]" << ", ";
+
+        }
+
+        cout << endl;
+
+    }
+
+
+}
+
 void HGraph::printGraph(){
 
     for(int i = 1; i <= V; i++){
@@ -176,10 +209,8 @@ void HGraph::moveNeighbor(int x) {
                     graph[iter->npoint].HSet[iter->ppoint-1].ppoint--;
 
                 } else{
-                    HNode hNode;
-                    hNode.ppoint = iter->ppoint - 1;
-                    hNode.lpoint = iter->lpoint;
-                    hNode.npoint = iter->npoint;
+                    HNode hNode = graph[iter->npoint].NSet.getHNode(iter->lpoint, iter->ppoint);
+                    hNode.ppoint--;
                     graph[iter->npoint].NSet.changeOneList(iter->lpoint, iter->ppoint, hNode);
 
                 }
@@ -191,7 +222,10 @@ void HGraph::moveNeighbor(int x) {
             it++;
 
         }
+    printGraph();
+
     }
+
 
 }
 
@@ -613,7 +647,7 @@ bool HGraph::queryAdj(int x, int y){
 
 int HGraph::findEdgeNeigh(int x){
 
-    vector<pair<int, int>> edge;
+    unordered_map<EdgeClass, int, EdgeHash, EdgeEqualTo> EdgeNei;
     int flag[MAX_VERTEX+1];
     memset(flag, 0, MAX_VERTEX+1);
 
@@ -639,7 +673,6 @@ int HGraph::findEdgeNeigh(int x){
 
     }
 
-
     p=graph[x].NSet.pHead->pNext;
     while(p!=NULL)
     {
@@ -650,20 +683,19 @@ int HGraph::findEdgeNeigh(int x){
             vector<HNode>::iterator it;
             for(it = graph[p2->npoint].HSet.begin(); it != graph[p2->npoint].HSet.end(); it++){
 
-                if(graph[p2->npoint].deg == graph[it->npoint].deg && flag[it->npoint] == 1){
+                if(flag[it->npoint] == 1) {
 
-                    flag[p2->npoint] = 2;
-                    edge.emplace_back(it->npoint, p2->npoint);
+                    if (it->npoint > p2->npoint) {
 
+                        EdgeClass edge(p2->npoint, it->npoint);
+                        EdgeNei[edge] = 1;
 
+                    } else {
 
-                }else if(flag[it->npoint] == 1){
-
-                    edge.emplace_back(it->npoint, p2->npoint);
-
+                        EdgeClass edge(it->npoint, p2->npoint);
+                        EdgeNei[edge] = 1;
+                    }
                 }
-
-
             }
             p2=p2->pNext;
         }
@@ -678,17 +710,18 @@ int HGraph::findEdgeNeigh(int x){
         vector<HNode>::iterator it2;
         for(it2 = graph[it1->npoint].HSet.begin(); it2 != graph[it1->npoint].HSet.end(); it2++){
 
-            if(graph[it1->npoint].deg == graph[it2->npoint].deg && flag[it2->npoint] == 1){
+            if(flag[it2->npoint] == 1) {
 
-                flag[it1->npoint] = 2;
-                edge.emplace_back(it2->npoint, it1->npoint);
+                if (it1->npoint > it2->npoint) {
 
+                    EdgeClass edge(it2->npoint, it1->npoint);
+                    EdgeNei[edge] = 1;
 
+                } else {
 
-            }else if(flag[it2->npoint] == 1){
-
-                edge.emplace_back(it2->npoint, it1->npoint);
-
+                    EdgeClass edge(it1->npoint, it2->npoint);
+                    EdgeNei[edge] = 1;
+                }
             }
         }
 
@@ -696,15 +729,21 @@ int HGraph::findEdgeNeigh(int x){
     }
 
 
-    vector<pair<int, int>>::iterator edgeit;
-    for(edgeit = edge.begin(); edgeit != edge.end(); edgeit++){
+    unordered_map<EdgeClass, int, EdgeHash, EdgeEqualTo>::iterator ittt;
+    for(ittt = EdgeNei.begin(); ittt != EdgeNei.end(); ittt++){
 
-        cout << "(" << edgeit->first << ", " << edgeit->second << "), ";
+        EdgeClass pair;
+        pair = ittt->first;
 
+        if(ittt->second == 1){
+
+            cout << "(" << pair.v1 << ", "<< pair.v2 << "), ";
+        }
     }
 
+
     cout << endl;
-    return edge.size();
+    return EdgeNei.size();
 
 
 

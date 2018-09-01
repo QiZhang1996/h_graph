@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "List.h"
+#include "tool.h"
 
 using namespace std;
 class Vertex{
@@ -39,6 +40,7 @@ public:
 
 public:
     void printGraph();
+    void printVertex(int i);
 
     int addEdgeSub(int x, int y);
     int addEdge(int x, int y);

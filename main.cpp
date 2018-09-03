@@ -1,6 +1,7 @@
 #include <iostream>
 #include "List.h"
 #include "HGraph.h"
+
 using namespace std;
 
 int main() {
@@ -64,8 +65,8 @@ int main() {
 //
 //    cout << "triangle number: " << total/3 << endl;
 
-    FILE *in = fopen("../dolphins.txt", "r");
-    if(in == NULL){
+    FILE *in = fopen("../out.txt", "r");
+    if (in == NULL) {
 
         cout << "files not exist" << endl;
         exit(1);
@@ -73,34 +74,31 @@ int main() {
     }
 
     int V = 0, E = 0;
-    fscanf(in ,"%d %d", &V, &E);
+    fscanf(in, "%d %d", &V, &E);
     HGraph hGraph(V, E);
 
-    hGraph.graph.reserve(V+1);
+    hGraph.graph.reserve(V + 1);
 
     int x = 0, y = 0;
 
-    while(fscanf(in, "%d %d", &x, &y) != EOF){
+    while (fscanf(in, "%d %d", &x, &y) != EOF) {
 
-        hGraph.addEdge(x+1, y+1);
+        hGraph.addEdge(x, y);
 
     }
 
     fclose(in);
 
     int total = 0;
+
+
     for(int i = 1; i<=V; i++){
 
-        cout << "i = " << i << ": ";
-
         total = total + hGraph.findEdgeNeigh(i);
+
     }
 
-    cout << "triangle number: " << total/3 << endl;
-
-
-
-
+    cout << "total: " << total/3 << endl;
 
     return 0;
 }

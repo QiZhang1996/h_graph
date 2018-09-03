@@ -4,13 +4,13 @@
 
 #ifndef HGRAPH2_HGRAPH_H
 #define HGRAPH2_HGRAPH_H
-#define MAX_VERTEX 1000
+#define MAX_VERTEX 160000
 
 #include <iostream>
 #include <vector>
 #include "List.h"
 #include "tool.h"
-
+#include <cstring>
 using namespace std;
 class Vertex{
 

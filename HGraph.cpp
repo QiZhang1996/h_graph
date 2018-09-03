@@ -222,7 +222,7 @@ void HGraph::moveNeighbor(int x) {
             it++;
 
         }
-    printGraph();
+    //printGraph();
 
     }
 
@@ -262,8 +262,8 @@ int HGraph::addEdgeSub(int x, int y){
 
 int HGraph::addEdge(int x, int y){
 
-    cout << "----------------------------------------------------------------" << endl;
-    cout << "insert V" << x << " and V" << y <<endl;
+//    cout << "----------------------------------------------------------------" << endl;
+//    cout << "insert V" << x << " and V" << y <<endl;
 
     moveNeighbor(x);
 
@@ -649,8 +649,7 @@ int HGraph::findEdgeNeigh(int x){
 
     unordered_map<EdgeClass, int, EdgeHash, EdgeEqualTo> EdgeNei;
     int flag[MAX_VERTEX+1];
-    memset(flag, 0, MAX_VERTEX+1);
-
+    memset(flag, 0, sizeof(flag));
     ListNode * p=graph[x].NSet.pHead->pNext;
     while(p!=NULL)
     {
@@ -729,20 +728,18 @@ int HGraph::findEdgeNeigh(int x){
     }
 
 
-    unordered_map<EdgeClass, int, EdgeHash, EdgeEqualTo>::iterator ittt;
-    for(ittt = EdgeNei.begin(); ittt != EdgeNei.end(); ittt++){
-
-        EdgeClass pair;
-        pair = ittt->first;
-
-        if(ittt->second == 1){
-
-            cout << "(" << pair.v1 << ", "<< pair.v2 << "), ";
-        }
-    }
-
-
-    cout << endl;
+//    unordered_map<EdgeClass, int, EdgeHash, EdgeEqualTo>::iterator ittt;
+//    for(ittt = EdgeNei.begin(); ittt != EdgeNei.end(); ittt++){
+//
+//        EdgeClass pair;
+//        pair = ittt->first;
+//
+//        if(ittt->second == 1){
+//
+//            cout << "(" << pair.v1 << ", "<< pair.v2 << "), ";
+//        }
+//    }
+//    cout << endl;
     return EdgeNei.size();
 
 
